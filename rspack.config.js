@@ -1,31 +1,31 @@
-import path from "path";
-import rspack from "@rspack/core";
-import { TsCheckerRspackPlugin } from "ts-checker-rspack-plugin";
-import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
+import path from 'path';
+import rspack from '@rspack/core';
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === 'production';
 
 /** @type {import('@rspack/core').Configuration} */
 const config = {
   entry: {
-    src: path.resolve(process.cwd(), "src/main.tsx"),
+    src: path.resolve(process.cwd(), 'src/main.tsx'),
   },
   output: {
-    path: path.resolve(process.cwd(), "dist"),
-    filename: "[name].[contenthash].js",
+    path: path.resolve(process.cwd(), 'dist'),
+    filename: '[name].[contenthash].js',
     clean: true,
   },
-  devtool: isProduction ? "source-map" : "cheap-module-source-map",
+  devtool: isProduction ? 'source-map' : 'cheap-module-source-map',
   optimization: {
-    runtimeChunk: "single",
+    runtimeChunk: 'single',
     splitChunks: {
-      chunks: "all",
+      chunks: 'all',
     },
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: ['.tsx', '.ts', '.js'],
     alias: {
-      "@": path.resolve(process.cwd(), "src"),
+      '@': path.resolve(process.cwd(), 'src'),
     },
   },
   experiments: {
@@ -33,7 +33,7 @@ const config = {
   },
   module: {
     parser: {
-      "css/auto": {
+      'css/auto': {
         namedExports: false,
       },
     },
@@ -41,55 +41,57 @@ const config = {
       {
         test: /\.tsx?$/,
         exclude: [/node_modules/],
-        loader: "builtin:swc-loader",
+        loader: 'builtin:swc-loader',
         options: {
           jsc: {
             parser: {
-              syntax: "typescript",
+              syntax: 'typescript',
               tsx: true,
             },
             transform: {
               react: {
-                runtime: "automatic",
+                runtime: 'automatic',
               },
             },
           },
         },
-        type: "javascript/auto",
+        type: 'javascript/auto',
       },
       {
         test: /\.css$/,
-        type: "css/auto",
+        type: 'css/auto',
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
       },
     ],
   },
   plugins: [
     new rspack.HtmlRspackPlugin({
-      template: path.resolve(process.cwd(), "src/index.html"),
-      filename: "index.html",
+      template: path.resolve(process.cwd(), 'src/index.html'),
+      filename: 'index.html',
       inject: true,
     }),
     process.env.SKIP_TYPE_CHECK
       ? undefined
-      : new TsCheckerRspackPlugin({ typescript: { configFile: "./tsconfig.json" } }),
+      : new TsCheckerRspackPlugin({
+          typescript: { configFile: './tsconfig.json' },
+        }),
   ],
   devServer: {
     static: {
-      directory: path.join(process.cwd(), "public"),
+      directory: path.join(process.cwd(), 'public'),
     },
     client: {
-      webSocketURL: "auto://0.0.0.0:0/ws",
+      webSocketURL: 'auto://0.0.0.0:0/ws',
     },
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     compress: true,
     port: 3000,
     hot: true,
     historyApiFallback: true,
-    watchFiles: ["src/**/*.css"],
+    watchFiles: ['src/**/*.css'],
   },
 };
 
