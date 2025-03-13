@@ -81,10 +81,15 @@ const config = {
     static: {
       directory: path.join(process.cwd(), "public"),
     },
+    client: {
+      webSocketURL: "auto://0.0.0.0:0/ws",
+    },
+    host: "0.0.0.0",
     compress: true,
     port: 3000,
     hot: true,
     historyApiFallback: true,
+    watchFiles: ["src/**/*.css"],
   },
 };
 
