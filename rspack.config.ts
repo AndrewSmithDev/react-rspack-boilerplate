@@ -1,12 +1,11 @@
+import { defineConfig } from '@rspack/cli';
 import path from 'path';
 import rspack from '@rspack/core';
 import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-/** @type {import('@rspack/core').Configuration} */
-const config = {
+export default defineConfig({
   entry: {
     src: path.resolve(process.cwd(), 'src/main.tsx'),
   },
@@ -93,6 +92,4 @@ const config = {
     historyApiFallback: true,
     watchFiles: ['src/**/*.css'],
   },
-};
-
-export default config;
+});
