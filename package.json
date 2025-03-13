@@ -1,14 +1,11 @@
 {
-  "name": "tp-test",
-  "private": true,
-  "version": "0.0.0",
+  "name": "react-rspack-boilerplate",
   "type": "module",
   "scripts": {
-    "dev": "rspack serve",
+    "start": "rspack serve",
     "build": "rspack",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "preview": "vite preview"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "react": "^19.0.0",
